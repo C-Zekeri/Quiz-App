@@ -101,6 +101,9 @@ function setNextQuestion() {
     choices.forEach(choice => {
         const number = choice.dataset['number'];
         choice.innerText = currentQuestion["choice" + number];
+        choice.style.backgroundColor = " rgb(234, 240, 234)";
+        choice.style.color = " black"
+
     })
     AcceptingAnswers = true;
 
@@ -165,7 +168,7 @@ const restart = document.querySelector('#restart');
 restart.addEventListener('click', restartGame);
 
 
-//last question don't splice, is repeated
+//splice bug
 //assess correct answer correctly.
 
 //default colour change for correct option. not now.
