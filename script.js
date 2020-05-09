@@ -81,8 +81,8 @@ function StartGame() {
 
 function setNextQuestion() {
     AvailableQuestions = [...questions];
-    let questionIndex = Math.floor(Math.random() * AvailableQuestions.length);
-    let currentQuestion = AvailableQuestions[questionIndex];
+    const questionIndex = Math.floor(Math.random() * AvailableQuestions.length);
+    currentQuestion = AvailableQuestions[questionIndex];
     counter++;
     counterText.innerText = counter + "/" + max_questions
 
@@ -94,7 +94,6 @@ function setNextQuestion() {
         endbutton.addEventListener('click', EndGame);
     }
 
-
     //input question and options from  array
     console.log(currentQuestion);
     question.innerText = currentQuestion.question;
@@ -103,7 +102,6 @@ function setNextQuestion() {
         choice.innerText = currentQuestion["choice" + number];
         choice.style.backgroundColor = " rgb(234, 240, 234)";
         choice.style.color = " black"
-
     })
     AcceptingAnswers = true;
 
@@ -169,7 +167,6 @@ restart.addEventListener('click', restartGame);
 
 
 //splice bug
-//assess correct answer correctly.
 
 //default colour change for correct option. not now.
     //const answerIndex = currentQuestion.answer;
