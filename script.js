@@ -68,8 +68,9 @@ let questions = [
         choice4: "Zamfara",
         answer: 2
     }
-
+    
 ];
+AvailableQuestions = [...questions];
 
 function StartGame() {
     let startpage = document.getElementById('start-display');
@@ -80,7 +81,6 @@ function StartGame() {
 }
 
 function setNextQuestion() {
-    AvailableQuestions = [...questions];
     const questionIndex = Math.floor(Math.random() * AvailableQuestions.length);
     currentQuestion = AvailableQuestions[questionIndex];
     counter++;
@@ -95,7 +95,6 @@ function setNextQuestion() {
     }
 
     //input question and options from  array
-    console.log(currentQuestion);
     question.innerText = currentQuestion.question;
     choices.forEach(choice => {
         const number = choice.dataset['number'];
@@ -107,16 +106,13 @@ function setNextQuestion() {
 
     //show feedback for correct answer
     choices.forEach(choice => {
-        console.log(currentQuestion);
         choice.addEventListener('click', e => {
             if (!AcceptingAnswers) return;
             
-            console.log(currentQuestion);
             AcceptingAnswers = false;
             
             const selectedChoice = e.target;
             const selectedAnswer = selectedChoice.dataset['number'];
-            console.log(currentQuestion.answer);
             const classToApply =
             selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
             if (classToApply === "correct") {
@@ -165,8 +161,6 @@ function restartGame() {
 const restart = document.querySelector('#restart');
 restart.addEventListener('click', restartGame);
 
-
-//splice bug
 
 //default colour change for correct option. not now.
     //const answerIndex = currentQuestion.answer;
