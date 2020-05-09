@@ -81,7 +81,6 @@ function StartGame() {
 function setNextQuestion() {
     counter++;
     counterText.innerText = counter + "/" + max_questions
-    //console.log(questionIndex);
     AvailableQuestions = [...questions];
     let questionIndex = Math.floor(Math.random() * AvailableQuestions.length);
     let currentQuestion = AvailableQuestions[questionIndex];
@@ -93,15 +92,14 @@ function setNextQuestion() {
         endbutton.addEventListener('click', EndGame);
     }
     else {
+        //input question and options from  array
         question.innerText = currentQuestion.question;
-        console.log(currentQuestion);
         choices.forEach(choice => {
             const number = choice.dataset['number'];
             choice.innerText = currentQuestion["choice" + number];
         })
         //remove used questions from array
         AvailableQuestions.splice(questionIndex, 1);
-        console.log(AvailableQuestions);
     }
 }
 //show feedback for correct answer
@@ -157,5 +155,7 @@ restart.addEventListener('click', restartGame);
 
     //accept only one answer
     //last question don't splice, is repeated
-    //default colour change for correct option
-    //unsplice for restart, clear score
+    //assess correct answer correctly.
+
+    //default colour change for correct option. not now.
+    //unsplice for restart, clear score. not now.
