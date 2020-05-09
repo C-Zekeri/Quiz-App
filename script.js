@@ -10,6 +10,7 @@ let score = 0;
 let counter = 0;
 let AvailableQuestions = [];
 let currentQuestion = {};
+let AcceptingAnswers = false;
 
 const start = document.querySelector('.start-btn');
 start.addEventListener('click', StartGame);
@@ -79,11 +80,12 @@ function StartGame() {
 }
 
 function setNextQuestion() {
-    counter++;
-    counterText.innerText = counter + "/" + max_questions
     AvailableQuestions = [...questions];
     let questionIndex = Math.floor(Math.random() * AvailableQuestions.length);
     let currentQuestion = AvailableQuestions[questionIndex];
+    counter++;
+    counterText.innerText = counter + "/" + max_questions
+
     if (AvailableQuestions.length == 0 || counter >= (max_questions)) {
         let endbutton = document.querySelector('.end-btn');
         let nextbutton = document.querySelector('.next-btn');;
@@ -91,42 +93,52 @@ function setNextQuestion() {
         endbutton.classList.remove('hide');
         endbutton.addEventListener('click', EndGame);
     }
-    else {
-        //input question and options from  array
-        question.innerText = currentQuestion.question;
-        choices.forEach(choice => {
-            const number = choice.dataset['number'];
-            choice.innerText = currentQuestion["choice" + number];
-        })
-        //remove used questions from array
-        AvailableQuestions.splice(questionIndex, 1);
-    }
-}
-//show feedback for correct answer
-choices.forEach(choice => {
-    choice.addEventListener('click', e => {
-        const selectedChoice = e.target;
-        const selectedAnswer = selectedChoice.dataset['number'];
-        //const answerIndex = currentQuestion.answer;
-        //const correctAnswer = currentQuestion["choice" + answerIndex];
-        const classToApply =
-            selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
-        if (classToApply === "correct") {
-            incrementScore(correct_score);
-            selectedChoice.style.backgroundColor = "green";
-            selectedChoice.style.color = "white";
-        }
-        else {
-            selectedChoice.style.backgroundColor = "red";
-            selectedChoice.style.color = "white";
-            //correctAnswer.style.backgroundColor = "green";
-            //correctAnswer.style.color = "white";
-        }
+
+
+    //input question and options from  array
+    console.log(currentQuestion);
+    question.innerText = currentQuestion.question;
+    choices.forEach(choice => {
+        const number = choice.dataset['number'];
+        choice.innerText = currentQuestion["choice" + number];
     })
-})
+    AcceptingAnswers = true;
+
+    //show feedback for correct answer
+    choices.forEach(choice => {
+        console.log(currentQuestion);
+        choice.addEventListener('click', e => {
+            if (!AcceptingAnswers) return;
+            
+            console.log(currentQuestion);
+            AcceptingAnswers = false;
+            
+            const selectedChoice = e.target;
+            const selectedAnswer = selectedChoice.dataset['number'];
+            console.log(currentQuestion.answer);
+            const classToApply =
+            selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+            if (classToApply === "correct") {
+                incrementScore(correct_score);
+                selectedChoice.style.backgroundColor = "green";
+                selectedChoice.style.color = "white";
+            }
+            else {
+                selectedChoice.style.backgroundColor = "red";
+                selectedChoice.style.color = "white";
+                //correctAnswer.style.backgroundColor = "green";
+                //correctAnswer.style.color = "white";
+            }
+        })
+    })
+
+    //remove used questions from array
+    AvailableQuestions.splice(questionIndex, 1);
+}
+
 //increment score
 function incrementScore(num) {
-    score+=num;
+    score += num;
     scoreText.innerText = score;
 }
 
@@ -153,9 +165,11 @@ const restart = document.querySelector('#restart');
 restart.addEventListener('click', restartGame);
 
 
-    //accept only one answer
-    //last question don't splice, is repeated
-    //assess correct answer correctly.
+//last question don't splice, is repeated
+//assess correct answer correctly.
 
-    //default colour change for correct option. not now.
-    //unsplice for restart, clear score. not now.
+//default colour change for correct option. not now.
+    //const answerIndex = currentQuestion.answer;
+    //const correctAnswer = choices[answerIndex-1];
+
+//unsplice for restart, clear score. not now.
