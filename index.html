@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quiz</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="card">
+        <div id="start-display">
+            <h2>Know your states and capitals?<h2>
+                    <h3>Take this quiz to find out.</h3>
+                    <button class="start-btn controls">Start</button>
+        </div>
+        <div id="qstn-container" class="hide">
+            <div id="hud">
+                <div id="hud-item" class="counter">
+                    <p class="hud-item-prefix">Question</p>
+                    <h2 class="hud-item-main-text" id="counter">1/5</h2>
+                </div>
+                <div id="hud-item" class="score">
+                    <p class="hud-item-prefix">Score</p>
+                    <h2 class="hud-item-main-text" id="score">0</h2>
+                </div>
+            </div>
+
+            <div id="question">Question</div>
+            <div id="options">
+                <button class="btn" data-number="1">Answer 1</button>
+                <button class="btn" data-number="2">Answer 2</button>
+                <button class="btn" data-number="3">Answer 3</button>
+                <button class="btn" data-number="4">Answer 4</button>
+            </div>
+            <div id="controls">
+                <button class="next-btn controls">Next</button>
+                <button class="end-btn controls hide">End</button>
+            </div>
+        </div>
+        <div id="end-display" class="hide">
+            <h2>You have scored:</h2>
+            <h3 id="final-score"></h3>
+            <button id="restart" class="controls">Play Again</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
