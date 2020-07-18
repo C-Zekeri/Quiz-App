@@ -155,6 +155,7 @@ function restartGame() {
     questionContainer.classList.remove('hide');
     counter = 0;
     score = 0;
+    let AvailableQuestions = [...questions];
     setNextQuestion();
 }
 
