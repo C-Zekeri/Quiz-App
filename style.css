@@ -3,14 +3,16 @@
     padding: 0;
     margin: 0;
 }
+
 body {
-    background-color: rgb(137, 150, 114);
+    background-color: rgb(116, 163, 112);
     font-family: Roboto, sans-serif;
     font-size: 14px;
     color: black;
     max-width: 100vw;
     max-height: 100vw;
 }
+
 .card {
     background-color: white;
     display: flex;
@@ -23,12 +25,13 @@ body {
     padding: 20px;
     border-radius: 5px;
 }
+
 div {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
 }
+
 .controls {
     background-color: green;
     color: white;
@@ -41,40 +44,53 @@ div {
     margin-top: 10px;
     align-items: center;
 }
+
 .controls:hover {
     box-shadow: 0 0.4rem 0.8rem 0 rgba(66, 75, 66, 0.712);
     transform: translateY(-0.08rem);
     transition: transform 150ms;
-} 
+}
+
 .btn:hover {
     cursor: pointer;
     box-shadow: 0 0.4rem 0.8rem 0 rgba(12, 88, 12, 0.712);
     transform: translateY(-0.08rem);
     transition: transform 150ms;
 }
+
 #start-display, #end-display {
     align-items: center;
 }
+
 h3, .start-btn.controls {
     margin: 10px;
 }
+
 #qstn-container, #question, #options {
     width: 100%;
     /*display: block;*/
 }
+
 #hud {
     flex-direction: row;
     justify-content: space-between;
 }
+
 #hud-item {
     align-items: center;
     margin-bottom: 0.8rem;
 }
+
 #question {
     font-weight: bold;
     font-size: 1.2rem;
     margin-bottom: 10px;
 }
+
+button:disabled{
+    filter: opacity(35%);
+}
+
 .btn {
     width: 100%;
     height: 100%;
@@ -84,20 +100,25 @@ h3, .start-btn.controls {
     padding: 10px;
     border-radius: 3px;
 }
+
 #options.button {
     width: 100%;
     height: 100%;
 }
+
 .end-btn {
     background-color: red;
     border: none;
 }
+
 .correct {
     background-color: green;
 }
+
 .incorrect {
     background-color: red;
 }
+
 .hide {
     display: none;
 }

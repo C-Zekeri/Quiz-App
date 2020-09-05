@@ -2,6 +2,8 @@ const question = document.getElementById('question');
 const choices = Array.from(document.getElementsByClassName('btn'));
 const counterText = document.getElementById('counter');
 const scoreText = document.getElementById('score');
+const endbutton = document.querySelector('.end-btn');
+const nextbutton = document.querySelector('.next-btn');
 const correct_score = 10;
 const max_questions = 5;
 const max_score = 50;
@@ -17,6 +19,9 @@ start.addEventListener('click', StartGame);
 
 const next = document.querySelector('.next-btn');
 next.addEventListener('click', setNextQuestion);
+
+const restart = document.querySelector('#restart');
+restart.addEventListener('click', restartGame);
 
 
 let questions = [
@@ -68,7 +73,7 @@ let questions = [
         choice4: "Zamfara",
         answer: 2
     }
-    
+
 ];
 AvailableQuestions = [...questions];
 
@@ -86,9 +91,7 @@ function setNextQuestion() {
     counter++;
     counterText.innerText = counter + "/" + max_questions
 
-    if (AvailableQuestions.length == 0 || counter >= (max_questions)) {
-        let endbutton = document.querySelector('.end-btn');
-        let nextbutton = document.querySelector('.next-btn');;
+    if (AvailableQuestions.length === 0 || counter >= (max_questions)) {
         nextbutton.classList.add('hide');
         endbutton.classList.remove('hide');
         endbutton.addEventListener('click', EndGame);
@@ -103,18 +106,28 @@ function setNextQuestion() {
         choice.style.color = " black"
     })
     AcceptingAnswers = true;
+    nextbutton.disabled = true;
+    endbutton.disabled = true;
 
     //show feedback for correct answer
     choices.forEach(choice => {
         choice.addEventListener('click', e => {
-            if (!AcceptingAnswers) return;
-            
+            if (!AcceptingAnswers) {
+                nextbutton.disabled = false;
+                endbutton.disabled = false;
+                return;
+            }
+
             AcceptingAnswers = false;
-            
+
             const selectedChoice = e.target;
             const selectedAnswer = selectedChoice.dataset['number'];
+            let answerIndex = currentQuestion.answer;
+            let correctAnswer = choices[answerIndex - 1];
+
             const classToApply =
-            selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+                selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+
             if (classToApply === "correct") {
                 incrementScore(correct_score);
                 selectedChoice.style.backgroundColor = "green";
@@ -123,8 +136,8 @@ function setNextQuestion() {
             else {
                 selectedChoice.style.backgroundColor = "red";
                 selectedChoice.style.color = "white";
-                //correctAnswer.style.backgroundColor = "green";
-                //correctAnswer.style.color = "white";
+                correctAnswer.style.backgroundColor = "green";
+                correctAnswer.style.color = "white";
             }
         })
     })
@@ -153,18 +166,11 @@ function restartGame() {
     let questionContainer = document.getElementById('qstn-container');
     endpage.classList.add('hide');
     questionContainer.classList.remove('hide');
+    endbutton.classList.add('hide');
+    nextbutton.classList.remove('hide');
     counter = 0;
     score = 0;
-    let AvailableQuestions = [...questions];
+    scoreText.innerText = 0;
+    AvailableQuestions = [...questions];
     setNextQuestion();
 }
-
-const restart = document.querySelector('#restart');
-restart.addEventListener('click', restartGame);
-
-
-//default colour change for correct option. not now.
-    //const answerIndex = currentQuestion.answer;
-    //const correctAnswer = choices[answerIndex-1];
-
-//unsplice for restart, clear score. not now.
